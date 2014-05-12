@@ -1,1 +1,9 @@
+<% if @magazine.read? %>
+    <p> You have read this one!</p>
+<% end %>
+
 <a href="/magazines/<%= @magazine.id %>/ads">Ads</a>
+
+<form action="/magazines/<%= @magazine.id %>/mark_as_read" method="post">
+  <button type="submit">I've read this one!</button>
+</form>

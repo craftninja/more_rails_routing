@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature 'Displaying Magazine ads' do
+feature 'Magazines' do
   scenario 'A user can see all ads for a magazine' do
     cosmo = Magazine.create!(name: 'Cosmo')
     Ad.create!(manufacturer: 'Avon', magazine_id: cosmo.id)
@@ -12,5 +12,17 @@ feature 'Displaying Magazine ads' do
 
     expect(page).to have_content "Avon"
     expect(page).to have_content "Mabeline"
+  end
+
+  scenario "A user can mark a magazine as read" do
+    cosmo = Magazine.create!(name: 'Cosmo')
+
+    visit "/magazines/#{cosmo.id}"
+
+    expect(page).to have_no_content "You have read this one!"
+
+    click_button "I've read this one!"
+
+    expect(page).to have_content "You have read this one!"
   end
 end
