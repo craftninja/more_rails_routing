@@ -25,4 +25,14 @@ feature 'Magazines' do
 
     expect(page).to have_content "You have read this one!"
   end
+
+  scenario "A user can search for magazines" do
+    Magazine.create!(name: 'Cosmo')
+    Magazine.create!(name: 'Car and Driver')
+
+    visit "/magazines/search?q=Cosmo"
+
+    expect(page).to have_content 'Cosmo'
+    expect(page).to have_no_content 'Car and Driver'
+  end
 end

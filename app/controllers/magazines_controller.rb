@@ -8,4 +8,8 @@ class MagazinesController < ApplicationController
     @magazine.update_attributes(read: true)
     redirect_to magazine_path(@magazine)
   end
+
+  def search
+    @magazines = Magazine.search(params[:q])
+  end
 end
